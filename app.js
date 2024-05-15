@@ -1,27 +1,25 @@
-Vue.createApp({
+const app = Vue.createApp({
+
     data() {
-        return{
-            goals: [],
-            enteredValue: ''         
-        };
-    },
+        return {
+              courseGoal: 'Finish the course',
+              courseGoalB: 'GOAL B',
+              vueLink: 'https://www.google.com'
+          };
+      },
     methods: {
-        addGoal(){
-            this.goals.push(this.enteredValue)
-            this.enteredValue = ''
+        outputGoal(){
+            const randomNumber = Math.random();
+            if(randomNumber < 0.5){
+                return this.courseGoal
+            } else{
+                return this.courseGoalB
+            }
         }
-    }
-}).mount('#app')
+
+    },
+
+});
 
 
-// console.log('Hello')
-// const textElement = document.getElementById('goal')! as HTMLInputElement
-// const submitButton = document.querySelector('button')! as HTMLButtonElement
-// const listElement = document.querySelector('ul')! as HTMLUListElement
-// submitButton.addEventListener('click', (event: Event)=>{
-//     console.log(textElement.value)
-//     const listItem = document.createElement('li')
-//     listItem.textContent = textElement.value
-//     listElement.appendChild(listItem)
-//     textElement.value = ""
-// })
+app.mount('#user-goal')
