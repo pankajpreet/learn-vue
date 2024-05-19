@@ -1,27 +1,20 @@
-Vue.createApp({
-    data() {
-        return{
-            goals: [],
-            enteredValue: ''         
-        };
+const app = Vue.createApp({
+    data(){
+        return {
+            output: '',
+            afinalOutput : ''
+        }
     },
-    methods: {
-        addGoal(){
-            this.goals.push(this.enteredValue)
-            this.enteredValue = ''
+    methods:{
+        showAlert(){
+            alert('Showing Alert!!')
+        },
+        saveOutput(event){
+            this.output = event.target.value
+        },
+        finalOutput(event){
+            this.afinalOutput = this.output
         }
     }
-}).mount('#app')
-
-
-// console.log('Hello')
-// const textElement = document.getElementById('goal')! as HTMLInputElement
-// const submitButton = document.querySelector('button')! as HTMLButtonElement
-// const listElement = document.querySelector('ul')! as HTMLUListElement
-// submitButton.addEventListener('click', (event: Event)=>{
-//     console.log(textElement.value)
-//     const listItem = document.createElement('li')
-//     listItem.textContent = textElement.value
-//     listElement.appendChild(listItem)
-//     textElement.value = ""
-// })
+})
+app.mount('#assignment')
