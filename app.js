@@ -1,48 +1,19 @@
 const app = Vue.createApp({
   data() {
-    return {
-      counter: 0,
-      name: ''
+    return { 
+      goals: [],
+      enteredGoal: ''
+
     };
   },
-  watch: {
-    counter(value){
-      if (value > 100){
-        this.counter = 0;
-      }
-    }
-  },
-  computed: {
-    fullName(){
-
-      if(this.name ==''){
-        return '';
-      }
-      return this.name + ' ' + 'LAST'
-
-    }
-  },
-  methods: {
-    outputFullName(){
-      if(this.name ==''){
-        return '';
-      }
-      return this.name + ' ' + 'LAST'
+  methods:{
+    addGoal(){
+      this.goals.push(this.enteredGoal)
     },
-    setName(event, lastName) {
-      this.name = event.target.value;
-    },
-    add(num) {
-      this.counter = this.counter + num;
-    },
-    reduce(num) {
-      this.counter = this.counter - num;
-      // this.counter--;
-    },
-    resetInput(){
-      this.name = '';
+    removeGoal(index){
+      this.goals.splice(index,1)
     }
   }
 });
 
-app.mount('#events');
+app.mount('#user-goals');
