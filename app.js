@@ -1,27 +1,48 @@
-Vue.createApp({
-    data() {
-        return{
-            goals: [],
-            enteredValue: ''         
-        };
-    },
-    methods: {
-        addGoal(){
-            this.goals.push(this.enteredValue)
-            this.enteredValue = ''
-        }
+const app = Vue.createApp({
+  data() {
+    return {
+      counter: 0,
+      name: ''
+    };
+  },
+  watch: {
+    counter(value){
+      if (value > 100){
+        this.counter = 0;
+      }
     }
-}).mount('#app')
+  },
+  computed: {
+    fullName(){
 
+      if(this.name ==''){
+        return '';
+      }
+      return this.name + ' ' + 'LAST'
 
-// console.log('Hello')
-// const textElement = document.getElementById('goal')! as HTMLInputElement
-// const submitButton = document.querySelector('button')! as HTMLButtonElement
-// const listElement = document.querySelector('ul')! as HTMLUListElement
-// submitButton.addEventListener('click', (event: Event)=>{
-//     console.log(textElement.value)
-//     const listItem = document.createElement('li')
-//     listItem.textContent = textElement.value
-//     listElement.appendChild(listItem)
-//     textElement.value = ""
-// })
+    }
+  },
+  methods: {
+    outputFullName(){
+      if(this.name ==''){
+        return '';
+      }
+      return this.name + ' ' + 'LAST'
+    },
+    setName(event, lastName) {
+      this.name = event.target.value;
+    },
+    add(num) {
+      this.counter = this.counter + num;
+    },
+    reduce(num) {
+      this.counter = this.counter - num;
+      // this.counter--;
+    },
+    resetInput(){
+      this.name = '';
+    }
+  }
+});
+
+app.mount('#events');
