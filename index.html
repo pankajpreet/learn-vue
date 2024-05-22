@@ -14,21 +14,45 @@
   </head>
   <body>
     <header>
-      <h1>Vue Lists and Conditional Content</h1>
+      <h1>Monster Slayer</h1>
     </header>
-    <section id="assignment">
-      <h2>Assignment</h2>
-      <!-- 1) Add code to manage a list of tasks in a Vue app -->
-      <!-- When clicking "Add Task" a new task with the entered text should be added -->
-      <input type="text" v-model="enteredTask">
-      <button @click="addTask">Add Task</button>
-      
-      <ul >
-        <li v-if="isVisible" v-for="task in tasks">{{task}}</li>
-      </ul>
-      <!-- 3) When the below button is pressed, the list should be shown or hidden -->
-      <!-- BONUS: Also update the button caption -->
-      <button @click="toggleList">{{ isVisible ? 'Hide' : 'Show'}} List</button>
-    </section>
+    <div id="game">
+      <section id="monster" class="container">
+        <h2>Monster Health</h2>
+        <div class="healthbar">
+          <div class="healthbar__value" :style="monsterBarStyles"></div>
+        </div>
+      </section>
+      <section id="player" class="container">
+        <h2>Your Health</h2>
+        <div class="healthbar">
+          <div class="healthbar__value" :style="playerBarStyles"></div>
+        </div>
+      </section>
+      <section class="container" v-if="winner">
+        <h2>Game Over!</h2>
+        <h3 v-if="winner === 'monster'">You lost!</h3>
+        <h3 v-else-if="winner === 'player'">you won!</h3>
+        <h3 v-else>Its a draw</h3>
+        <button @click="restartGame">Restart</button>
+        
+      </section>
+      <section id="controls" v-else>
+        <button @click="attackMonster">ATTACK</button>
+        <button :disabled="isSpecialAttackAllowed" @click="specialAttack">SPECIAL ATTACK</button>
+        <button @click="healPlayer">HEAL</button>
+        <button @click="surrender">SURRENDER</button>
+      </section>
+      <section id="log" class="container">
+        <h2>Battle Log</h2>
+        <ul>
+          <li v-for="msg in logMessages">
+            <span :class="{'log--player': msg.actionBy === 'player','log--monster': msg.actionBy === 'monster'}">{{msg.actionBy === 'player' ? 'Player ':'Monster '}}</span>
+            <span v-if="msg.actionType === 'heal'">heal himself for <span class="log--heal">{{msg.actionValue}}</span></span>
+            <span v-else>attacks and deals <span class="log--damage">{{msg.actionValue}}</span></span>
+          </li>
+        </ul>
+      </section>
+    </div>
   </body>
 </html>
