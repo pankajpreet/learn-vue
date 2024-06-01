@@ -2,21 +2,27 @@ const app = Vue.createApp(
     {
         data(){
             return {
-                tasks: [],
-                enteredTask: '',
-                isVisible: true
-            }
+                boxASelected : false,
+                boxBSelected : false,
+                boxCSelected : false,
+            };
         },
         methods:{
-            addTask(){
-                this.tasks.push(this.enteredTask)
-                this.enteredTask = ''
-            },
-            toggleList(){
-                this.isVisible = !this.isVisible
+            boxSelected(box){
+                if(box === 'A'){
+                    this.boxASelected = !this.boxASelected
+                } else if(box==='B'){
+                    this.boxBSelected = !this.boxBSelected
+                } else if(box==='C'){
+                    this.boxCSelected = !this.boxCSelected
+                }
+            }
+        }, 
+        computed:{
+            boxAClasses(){
+                return {active: this.boxASelected}
             }
         }
     }
-)
-
-app.mount('#assignment')
+);
+app.mount('#styling')
