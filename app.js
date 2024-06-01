@@ -1,19 +1,23 @@
-const app = Vue.createApp({
-  data() {
-    return { 
-      goals: [],
-      enteredGoal: ''
-
-    };
-  },
-  methods:{
-    addGoal(){
-      this.goals.push(this.enteredGoal)
-    },
-    removeGoal(index){
-      this.goals.splice(index,1)
+const app= Vue.createApp(
+    {
+        data(){
+            return{
+                userInput : '',
+                pVisible: true,
+                textColor:'',
+            };
+        }, 
+        computed:{
+            pClasses(){
+                return ['p', this.userInput, this.pVisible ? 'visible': 'hidden']
+            }
+        },
+        methods:{
+            toggleParagraph(){
+                this.pVisible = !this.pVisible
+            }
+        }
     }
-  }
-});
+);
 
-app.mount('#user-goals');
+app.mount('#assignment')
