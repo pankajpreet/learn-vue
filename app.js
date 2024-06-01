@@ -1,28 +1,30 @@
-const app = Vue.createApp(
-    {
-        data(){
-            return {
-                boxASelected : false,
-                boxBSelected : false,
-                boxCSelected : false,
-            };
-        },
-        methods:{
-            boxSelected(box){
-                if(box === 'A'){
-                    this.boxASelected = !this.boxASelected
-                } else if(box==='B'){
-                    this.boxBSelected = !this.boxBSelected
-                } else if(box==='C'){
-                    this.boxCSelected = !this.boxCSelected
-                }
-            }
-        }, 
-        computed:{
-            boxAClasses(){
-                return {active: this.boxASelected}
-            }
-        }
-    }
-);
-app.mount('#styling')
+const app = Vue.createApp({
+  beforeCreate(data){
+    console.log('beforecreated',data)
+  },
+  created(data){
+    console.log('created',data)
+  },
+  beforeMount(data){
+    console.log('beforeMount',data)
+  },
+  mounted(data){
+    console.log('mounted',data)
+  },
+  data() {
+    return {
+      currentUserInput: '',
+      message: 'Vue is great!',
+    };
+  },
+  methods: {
+    saveInput(event) {
+      this.currentUserInput = event.target.value;
+    },
+    setText() {
+      this.message = this.currentUserInput;
+    },
+  },
+});
+
+app.mount('#app');
